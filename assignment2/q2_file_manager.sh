@@ -15,36 +15,36 @@ while true; do
     echo "9. copy a files"
     echo "10.Exit"
     echo ""
-    read -p "Enter your choice: " choice
+    read -r -p "Enter your choice: " choice
 
     case $choice in
-        1) echo "\n$(ls)\n";;
-        2) read -p "Enter directory name: " dirname; 
+        1) printf "\n"; ls; printf "\n";;
+        2) read -r -p "Enter directory name: " dirname; 
         if [ -d "$dirname" ]; then
             echo "Directory already exists"
         else
             mkdir "$dirname"
         fi ;;
-        3) read -p "Enter file name: " filename; 
+        3) read -r -p "Enter file name: " filename; 
         if [ -f "$filename" ]; then
             echo "File already exists"
         else
             touch "$filename"
         fi ;;
-        4) echo "$(ls)"; read -p "Enter file name to delete: " filename;
+        4) ls; read -r -p "Enter file name to delete: " filename;
         if [ -f "$filename" ]; then
             rm "$filename"
         else
             echo "File does not exist"
         fi ;;
-        5) echo "$(ls)"; read -p "Enter current file name: " oldname; 
-            read -p "Enter new file name: " newname; mv "$oldname" "$newname" ;;
-        6) read -p "Enter file name to search: " searchname; find . -name "$searchname" ;;
+        5) ls; read -r -p "Enter current file name: " oldname; 
+            read -r -p "Enter new file name: " newname; mv "$oldname" "$newname" ;;
+        6) read -r -p "Enter file name to search: " searchname; find . -name "$searchname" ;;
         7) echo "Files: $(find . -type f | wc -l), Directories: $(find . -type d | wc -l)" ;;
-        8) echo "$(ls -l)"; read -p "Enter file name to check permissions: " permfile; 
+        8) ls -l; read -r -p "Enter file name to check permissions: " permfile; 
             stat "$permfile" ;;
-        9) echo "$(ls)"; read -p "Enter file name to copy: " srcfile; 
-            read -p "Enter destination file name: " destfile; cp "$srcfile" "$destfile" ;;
+        9) ls; read -r -p "Enter file name to copy: " srcfile; 
+            read -r -p "Enter destination file name: " destfile; cp "$srcfile" "$destfile" ;;
         10) echo "Exiting..."; break ;; 
         *) echo "Invalid choice, please try again." ;;
     esac
